@@ -6,7 +6,7 @@ Interactive tutorial notebooks for the course. Open any notebook directly in
 Google Colab (free tier is sufficient), or clone and run locally with the
 course environment.
 
-Course site: https://boyu-zhang-uoi.github.io/Python-for-Machine-Learning/
+Course site: https://boyu-zhang-uoi.github.io/pml-f2026/
 
 | Notebook | Topic | Open in Colab |
 |----------|-------|---------------|
