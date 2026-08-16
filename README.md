@@ -33,3 +33,10 @@ are optional self-study (Keras 3 is multi-backend and can run on PyTorch).
 
 These notebooks contain no graded content. Homework is distributed separately
 via per-assignment template repositories (see the course site).
+
+## How these notebooks were prepared
+
+Generative AI assistants were used in drafting these notebooks. Every cell was
+executed while writing them and the code is known to run; responsibility for the
+content rests with the instructor. If a notebook breaks or a result looks wrong,
+please report it.
