@@ -1,0 +1,19 @@
+{
+  "model": "HistGradientBoostingClassifier inside a preprocessing Pipeline",
+  "trained_rows": 4500,
+  "test_roc_auc": 0.8267,
+  "numeric_features": [
+    "tenure_months",
+    "monthly_charges",
+    "support_calls"
+  ],
+  "categorical_features": [
+    "plan",
+    "region"
+  ],
+  "training_medians": {
+    "tenure_months": 35.0,
+    "monthly_charges": 70.35,
+    "support_calls": 1.0
+  }
+}
