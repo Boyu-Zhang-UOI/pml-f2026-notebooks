@@ -1,0 +1,7 @@
+# Byproducts of running the notebooks, not content.
+# Datasets download on first run; figures are saved by the cells that make them.
+data/
+*.png
+*.jpg
+.ipynb_checkpoints/
+__pycache__/
