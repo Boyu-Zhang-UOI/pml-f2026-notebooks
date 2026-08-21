@@ -67,6 +67,17 @@ environment does not install. Run them in Colab.
 
 ---
 
+## How these notebooks were prepared
+
+Generative AI assistants were used in drafting these notebooks, the same as for
+the rest of the course materials, and the same standard applies here that the
+syllabus asks of you: **every cell was executed while writing it**, the saved
+outputs are real runs, and where a demonstration did not show what the text
+claimed, the demonstration was rebuilt rather than the claim softened.
+
+Responsibility for the content rests with the instructor. If a notebook breaks,
+or a result looks wrong, please report it.
+
 ## Running locally
 
 ```bash
