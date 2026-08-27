@@ -71,9 +71,10 @@ running it, and so a broken cell is caught before class rather than during it.
   that load 569 tumours, hold a quarter back, fit, and score honestly against
   the do-nothing baseline. Slides 20–22 carry the same three cells.
 - **`class-demos/`** — the in-class demos for sessions 2, 3, 8 and 10, built
-  from the same code the slides carry, with outputs saved. They exist so class
-  runs in Colab rather than on anyone's local install; read them afterwards to
-  replay what happened in the room.
+  from each session's demo script, with outputs saved. Sessions 3, 8 and 10
+  run the decks' own code; session 2 runs its own small examples in the
+  deck's order. They exist so class runs in Colab rather than on anyone's
+  local install; read them afterwards to replay what happened in the room.
 - **Python refresher** — Types, loops, functions, a first class. **Below the
   level of Session 2** — this is the catch-up if Python itself is new.
 - **Python idioms an ML course assumes** — Aliasing, the mutable default,
