@@ -5,3 +5,4 @@ data/
 *.jpg
 .ipynb_checkpoints/
 __pycache__/
+*.csv

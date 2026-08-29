@@ -29,6 +29,7 @@ running it, and so a broken cell is caught before class rather than during it.
 | [`01_session01_taste_demo.ipynb`](00-setup/01_session01_taste_demo.ipynb) | A whole ML system, end to end — the Session 1 in-class demo | S1 | — | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Boyu-Zhang-UOI/pml-f2026-notebooks/blob/main/00-setup/01_session01_taste_demo.ipynb) |
 | [`session02_python_essentials.ipynb`](class-demos/session02_python_essentials.ipynb) | The Python that bites — the Session 2 in-class demo | S2 | — | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Boyu-Zhang-UOI/pml-f2026-notebooks/blob/main/class-demos/session02_python_essentials.ipynb) |
 | [`session03_numpy_arrays.ipynb`](class-demos/session03_numpy_arrays.ipynb) | NumPy arrays live — the Session 3 in-class demo | S3 | — | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Boyu-Zhang-UOI/pml-f2026-notebooks/blob/main/class-demos/session03_numpy_arrays.ipynb) |
+| [`session04_numpy_pandas.ipynb`](class-demos/session04_numpy_pandas.ipynb) | NumPy indexing meets pandas — the Session 4 in-class demo | S4 | — | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Boyu-Zhang-UOI/pml-f2026-notebooks/blob/main/class-demos/session04_numpy_pandas.ipynb) |
 | [`session08_linear_regression.ipynb`](class-demos/session08_linear_regression.ipynb) | Gradient descent, from scratch — the Session 8 in-class demo | S8 | — | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Boyu-Zhang-UOI/pml-f2026-notebooks/blob/main/class-demos/session08_linear_regression.ipynb) |
 | [`session10_logistic_regression.ipynb`](class-demos/session10_logistic_regression.ipynb) | Logistic regression and multiclass — the Session 10 in-class demo | S10 | — | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Boyu-Zhang-UOI/pml-f2026-notebooks/blob/main/class-demos/session10_logistic_regression.ipynb) |
 | [`01_python_basics_tutorial.ipynb`](01-python-basics/01_python_basics_tutorial.ipynb) | Python refresher | before S2 | — | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Boyu-Zhang-UOI/pml-f2026-notebooks/blob/main/01-python-basics/01_python_basics_tutorial.ipynb) |
@@ -70,8 +71,8 @@ running it, and so a broken cell is caught before class rather than during it.
 - **A whole ML system, end to end** — The Session 1 in-class demo: ten lines
   that load 569 tumours, hold a quarter back, fit, and score honestly against
   the do-nothing baseline. Slides 20–22 carry the same three cells.
-- **`class-demos/`** — the in-class demos for sessions 2, 3, 8 and 10, built
-  from each session's demo script, with outputs saved. Sessions 3, 8 and 10
+- **`class-demos/`** — the in-class demos for sessions 2, 3, 4, 8 and 10, built
+  from each session's demo script, with outputs saved. Sessions 3, 4, 8 and 10
   run the decks' own code; session 2 runs its own small examples in the
   deck's order. They exist so class runs in Colab rather than on anyone's
   local install; read them afterwards to replay what happened in the room.
