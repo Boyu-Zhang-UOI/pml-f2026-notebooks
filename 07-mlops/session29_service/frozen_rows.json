@@ -1,0 +1,57 @@
+[
+  {
+    "id": "row0",
+    "reading": {
+      "vibration_mm_s": 3.5,
+      "temp_c": 64.4,
+      "load_kn": 92.4,
+      "hours": 2188.9
+    },
+    "p_fail": 0.108,
+    "label": "pass"
+  },
+  {
+    "id": "row1",
+    "reading": {
+      "vibration_mm_s": 2.5,
+      "temp_c": 56.8,
+      "load_kn": 105.2,
+      "hours": 10329.7
+    },
+    "p_fail": 0.465,
+    "label": "pass"
+  },
+  {
+    "id": "row2",
+    "reading": {
+      "vibration_mm_s": 1.9,
+      "temp_c": 51.2,
+      "load_kn": 124.7,
+      "hours": 6057.5
+    },
+    "p_fail": 0.013,
+    "label": "pass"
+  },
+  {
+    "id": "row3",
+    "reading": {
+      "vibration_mm_s": 2.2,
+      "temp_c": 57.0,
+      "load_kn": 129.1,
+      "hours": 12549.4
+    },
+    "p_fail": 0.782,
+    "label": "fail"
+  },
+  {
+    "id": "row4",
+    "reading": {
+      "vibration_mm_s": 2.9,
+      "temp_c": 55.8,
+      "load_kn": 121.6,
+      "hours": 11849.2
+    },
+    "p_fail": 0.898,
+    "label": "fail"
+  }
+]

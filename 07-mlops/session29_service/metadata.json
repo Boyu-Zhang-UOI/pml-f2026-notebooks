@@ -1,19 +1,28 @@
 {
-  "model": "HistGradientBoostingClassifier inside a preprocessing Pipeline",
-  "trained_rows": 4500,
-  "test_roc_auc": 0.8267,
-  "numeric_features": [
-    "tenure_months",
-    "monthly_charges",
-    "support_calls"
-  ],
-  "categorical_features": [
-    "plan",
-    "region"
-  ],
-  "training_medians": {
-    "tenure_months": 35.0,
-    "monthly_charges": 70.35,
-    "support_calls": 1.0
+  "model_version": "bearing_v3",
+  "run_id": "4287c3e0",
+  "config": {
+    "model": "logreg",
+    "C": 1.0,
+    "features": 4,
+    "seed": 0
+  },
+  "metrics": {
+    "test_accuracy": 0.8333
+  },
+  "data": {
+    "train_rows": 900,
+    "sha256": "fb4b1df31166"
+  },
+  "artifact": {
+    "file": "bearing_v3.joblib",
+    "sha256": "52fe01c5cd88"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "scikit-learn": "1.9.0",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "joblib": "1.5.3"
   }
 }

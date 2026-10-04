@@ -1,27 +1,17 @@
-# Population Stability Index: has the input distribution moved?
+# Input drift without labels: a two-sample KS test per feature against the
+# training sample, with the alarm set on the statistic, not the p-value.
 
-import numpy as np
 import pandas as pd
+from scipy import stats
 
-# Rules of thumb from credit scoring, where the measure comes from.
-STABLE, WATCH = 0.10, 0.25
-
-
-def psi(reference, current, bins=10):
-    # PSI between two samples of one feature: 0 means identical shapes.
-    reference = pd.Series(reference).dropna()
-    current = pd.Series(current).dropna()
-    edges = np.unique(np.quantile(reference, np.linspace(0, 1, bins + 1)))
-    if len(edges) < 3:
-        return 0.0
-    ref_share = np.histogram(reference, bins=edges)[0] / len(reference)
-    cur_share = np.histogram(current, bins=edges)[0] / len(current)
-    ref_share = np.clip(ref_share, 1e-6, None)
-    cur_share = np.clip(cur_share, 1e-6, None)
-    return float(((cur_share - ref_share) * np.log(cur_share / ref_share)).sum())
+ALERT_KS = 0.10
 
 
-def verdict(value):
-    if value < STABLE:
-        return "stable"
-    return "watch" if value < WATCH else "ALERT"
+def drift_report(reference, window):
+    rows = []
+    for col in reference.columns:
+        ks = stats.ks_2samp(reference[col], window[col])
+        rows.append({"feature": col, "KS stat": round(float(ks.statistic), 3),
+                     "p-value": float(ks.pvalue),
+                     "alarm": bool(ks.statistic > ALERT_KS)})
+    return pd.DataFrame(rows)

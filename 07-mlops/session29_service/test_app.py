@@ -1,48 +1,44 @@
-# The contract, as tests. Run with: pytest session29_service
+# The contract, as tests. Run with: python -m pytest session29_service
 
+import json
 from pathlib import Path
 
-import joblib
-import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
 
 from app import app
 
+HERE = Path(__file__).parent
 client = TestClient(app)
-VALID = {"tenure_months": 12, "monthly_charges": 80.0, "support_calls": 2,
-         "plan": "plus", "region": "south"}
+GOOD = {"vibration_mm_s": 2.9, "temp_c": 61.5, "load_kn": 128.0, "hours": 9400.0}
+FROZEN = json.loads((HERE / "frozen_rows.json").read_text())
 
 
-def test_health_reports_a_version():
-    body = client.get("/health").json()
-    assert body["status"] == "ok"
-    assert body["model_version"]
+def test_health():
+    r = client.get("/health")
+    assert r.json()["status"] == "ok"
 
 
-def test_valid_request_returns_a_probability():
-    body = client.post("/predict", json=VALID).json()
-    assert 0.0 <= body["churn_probability"] <= 1.0
-    assert body["churn"] == (body["churn_probability"] >= body["threshold"])
+def test_predict_returns_a_labelled_answer():
+    r = client.post("/predict", json=GOOD)
+    assert r.status_code == 200
+    assert r.json()["label"] in {"pass", "fail"}
 
 
-@pytest.mark.parametrize("bad", [
-    {**VALID, "tenure_months": -1},
-    {**VALID, "plan": "platinum"},
-    {**VALID, "support_calls": "many"},
-    {**VALID, "unexpected": 1},
-])
-def test_bad_requests_are_rejected(bad):
-    assert client.post("/predict", json=bad).status_code == 422
+def test_malformed_input_is_rejected():
+    r = client.post("/predict", json={"temp_c": 71.2})
+    assert r.status_code == 422
 
 
-def test_missing_optional_field_is_imputed_not_rejected():
-    payload = {**VALID, "monthly_charges": None}
-    assert client.post("/predict", json=payload).status_code == 200
+@pytest.mark.parametrize("field, value", [
+    ("vibration_mm_s", "hot"), ("hours", -5.0), ("temp_c", 500.0)])
+def test_bad_values_are_rejected(field, value):
+    r = client.post("/predict", json={**GOOD, field: value})
+    assert r.status_code == 422
 
 
-def test_api_matches_the_artifact_exactly():
-    pipeline = joblib.load(Path(__file__).parent / "model.joblib")
-    direct = float(pipeline.predict_proba(pd.DataFrame([VALID]))[0, 1])
-    served = client.post("/predict", json=VALID).json()["churn_probability"]
-    assert served == round(direct, 4)
+@pytest.mark.parametrize("row", FROZEN, ids=[r["id"] for r in FROZEN])
+def test_frozen_rows_give_their_recorded_answers(row):
+    body = client.post("/predict", json=row["reading"]).json()
+    assert body["label"] == row["label"]
+    assert abs(body["probabilities"]["fail"] - row["p_fail"]) <= 0.001

@@ -1,9 +1,9 @@
-# Serving dependencies, pinned tightly on purpose: the container is the
-# reproducibility boundary. Loosen these and "it worked last month" begins.
-fastapi==0.115.6
-uvicorn[standard]==0.34.0
-pydantic==2.10.4
-scikit-learn==1.7.2
-pandas==2.3.3
-numpy==2.3.4
-joblib==1.4.2
+# Serving dependencies, pinned to the versions that trained and tested
+# bearing_v3.joblib (collected by the notebook, not typed by hand).
+fastapi==0.141.1
+uvicorn==0.52.4
+pydantic==2.13.5
+scikit-learn==1.9.0
+scipy==1.17.1
+numpy==2.4.6
+joblib==1.5.3

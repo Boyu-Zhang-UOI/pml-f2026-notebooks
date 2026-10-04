@@ -1,34 +1,44 @@
-# The service: one model, one endpoint, one health check.
+# The bearing service: the schema of slide 17 and the app of slide 18.
 
-import json
 from pathlib import Path
 
 import joblib
-import pandas as pd
 from fastapi import FastAPI
-
-from schema import Customer, Prediction
+from pydantic import BaseModel, Field
 
 HERE = Path(__file__).parent
-MODEL_VERSION = "2026.08.1"
-THRESHOLD = 0.5
+FEATURES = ["vibration_mm_s", "temp_c", "load_kn", "hours"]
+VERSION = "bearing_v3"
 
-app = FastAPI(title="Churn service", version=MODEL_VERSION)
-model = joblib.load(HERE / "model.joblib")
-metadata = json.loads((HERE / "metadata.json").read_text())
+
+class BearingReading(BaseModel):
+    vibration_mm_s: float = Field(ge=0.0, le=50.0)
+    temp_c: float = Field(ge=-20.0, le=200.0)
+    load_kn: float = Field(ge=0.0, le=400.0)
+    hours: float = Field(ge=0.0)
+
+
+class Prediction(BaseModel):
+    label: str
+    probabilities: dict[str, float]
+    model_version: str
+
+
+app = FastAPI(title="Bearing quality service", version=VERSION)
+MODEL = joblib.load(HERE / f"{VERSION}.joblib")   # once, at import
 
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "model_version": MODEL_VERSION,
-            "test_roc_auc": metadata["test_roc_auc"]}
+    return {"status": "ok", "model_version": VERSION}
 
 
 @app.post("/predict", response_model=Prediction)
-def predict(customer: Customer) -> Prediction:
-    # One row, raw: the pipeline applies the training-time preprocessing itself.
-    frame = pd.DataFrame([customer.model_dump()])
-    probability = float(model.predict_proba(frame)[0, 1])
-    return Prediction(churn_probability=round(probability, 4),
-                      churn=probability >= THRESHOLD,
-                      threshold=THRESHOLD, model_version=MODEL_VERSION)
+def predict(reading: BearingReading):
+    row = [[getattr(reading, f) for f in FEATURES]]
+    proba = MODEL.predict_proba(row)[0]
+    return Prediction(
+        label="fail" if proba[1] >= 0.5 else "pass",
+        probabilities={"pass": round(float(proba[0]), 3),
+                       "fail": round(float(proba[1]), 3)},
+        model_version=VERSION)

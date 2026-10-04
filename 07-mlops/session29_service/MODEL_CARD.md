@@ -1,28 +1,24 @@
-# Model card — churn service 0.8267 test ROC-AUC
+# Model card: bearing quality service (bearing_v3)
 
-**Version** 2026.08.1 · trained on synthetic course data, not on customers.
+**Artifact** `bearing_v3.joblib`, sha256 `52fe01c5cd88`;
+run `4287c3e0`. Trained on simulated course data, not on a real plant.
 
 ## Intended use
-Ranking accounts for a retention team's review queue. It is a triage aid, not a
-decision, and it must not be used to set prices or deny service.
+Ranking bearings for the next inspection round. It is a triage aid: a "pass"
+must never be used to skip a scheduled inspection.
 
 ## Inputs
-`tenure_months`, `monthly_charges` (may be missing), `support_calls`, `plan`,
-`region`. Validation and ranges are in `schema.py`; anything outside them is
-rejected rather than guessed.
+`vibration_mm_s`, `temp_c`, `load_kn`, `hours`. The bounds are in `app.py`;
+anything outside them is rejected with a 422 rather than scored.
 
-## Training data
-6000 synthetic rows, 5% of `monthly_charges` missing by construction.
-
-## Evaluation
-Held-out 25% split; ROC-AUC reported in `metadata.json`. No fairness audit has
-been run: the synthetic data carries no protected attribute, and a real
-deployment would require one (see Session 30).
+## Training data and evaluation
+900 simulated readings for training and 300 held out.
+Test accuracy 0.833, against 0.597 for always
+answering the majority class.
 
 ## Limitations
-- The threshold is fixed at 0.5 and has not been chosen against a cost model.
-- No monitoring of outcomes, only of inputs (`monitor.py`, PSI).
-- Retraining cadence undefined.
-
-## Contact
-Course staff, CS 4771/5771.
+- The threshold is fixed at 0.5 and has not been chosen against the cost of a
+  missed failure.
+- The monitor (`monitor.py`) watches inputs only. A change in what the inputs
+  mean, such as a new lubricant, is visible only once inspection labels arrive.
+- No subgroup audit has been run (see Session 30).
