@@ -1,4 +1,4 @@
-# Train the bearing-quality classifier (Session 29, slide 5) and save one
+# Train the bearing-quality classifier (Session 29, slide 6) and save one
 # artifact that carries its own preprocessing, plus the record of the run.
 
 import hashlib

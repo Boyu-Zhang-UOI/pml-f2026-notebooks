@@ -1,4 +1,4 @@
-# The bearing service: the schema of slide 17 and the app of slide 18.
+# The bearing service: the schema of slide 21 and the app of slide 22.
 
 from pathlib import Path
 
